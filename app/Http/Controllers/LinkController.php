@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLinkRequest;
 use App\Http\Requests\UpdateLinkRequest;
 use App\Models\Link;
+use App\Models\User;
 use Illuminate\Contracts\Cache\Store;
 
 class LinkController extends Controller
@@ -22,7 +23,13 @@ class LinkController extends Controller
      */
     public function store(StoreLinkRequest $request)
     {
-        Link::create($request->validated());
+        /**
+         * @var User $user
+         */
+
+        $user = auth()->user();
+
+        $user->links()->create($request->validated());
 
         return to_route('dashboard')->with('success', 'Link created successfully');
     }

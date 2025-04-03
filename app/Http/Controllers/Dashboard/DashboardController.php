@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function __invoke()
     {
-        return view('dashboard.page');
+        /**
+         * @var User
+         */
+
+        $user = auth()->user();
+
+        return view('dashboard');
     }
 }
