@@ -54,6 +54,50 @@ class LinkController extends Controller
         return to_route('dashboard')->with('message', 'Alterado com sucesso!');
     }
 
+    public function up(Link $link)
+    {
+        $order = $link->sort;
+        $newOrder = $order - 1;
+
+        /**
+         * @var User $user
+         */
+        $user = auth()->user();
+
+        $swapWith = $user->links()
+            ->where('sort', '=', $newOrder)
+            ->first();
+
+        $link->fill(['sort' => $newOrder])->save();
+        $swapWith->fill(['sort' => $order])->save();
+
+        return view('dashboard', [
+            'links' => $user->links()->orderBy('sort')->get(),
+        ])->with('message', 'Alterado com sucesso!');
+    }
+
+    public function down(Link $link)
+    {
+        $order = $link->sort;
+        $newOrder = $order + 1;
+
+        /**
+         * @var User $user
+         */
+        $user = auth()->user();
+
+        $swapWith = $user->links()
+            ->where('sort', '=', $newOrder)
+            ->first();
+
+        $link->fill(['sort' => $newOrder])->save();
+        $swapWith->fill(['sort' => $order])->save();
+
+        return view('dashboard', [
+            'links' => $user->links()->orderBy('sort')->get(),
+        ])->with('message', 'Alterado com sucesso!');
+    }
+
     /**
      * Remove the specified resource from storage.
      */

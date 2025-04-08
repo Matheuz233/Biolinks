@@ -16,9 +16,12 @@ class LinkSeeder extends Seeder
     {
         User::all()
             ->each(function ($user) {
-                Link::factory()->count(8)->create([
-                    'user_id' => $user->id,
-                ]);
+                foreach (range(1, random_int(5, 8)) as $order) {
+                    Link::factory()->create([
+                        'user_id' => $user->id,
+                        'sort' => $order,
+                    ]);
+                }
             });
     }
 }
