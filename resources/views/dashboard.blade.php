@@ -6,7 +6,8 @@
     <h1>Dashboard</h1>
     <h2>{{ auth()->user()->name }} :: {{ auth()->id() }}</h2>
 
-    <a hrfe="{{ route('links.create') }}">Criar link</a>
+    <a href="{{ route('profile') }}">Editar Perfil</a>
+    <a href="{{ route('links.create') }}">Criar link</a>
 
     <div>
         <ul>
