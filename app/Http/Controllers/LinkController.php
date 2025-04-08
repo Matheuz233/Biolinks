@@ -68,12 +68,12 @@ class LinkController extends Controller
             ->where('sort', '=', $newOrder)
             ->first();
 
-        $link->fill(['sort' => $newOrder])->save();
-        $swapWith->fill(['sort' => $order])->save();
+        if ($swapWith) { // Verifique se $swapWith não é null
+            $link->fill(['sort' => $newOrder])->save();
+            $swapWith->fill(['sort' => $order])->save();
+        }
 
-        return view('dashboard', [
-            'links' => $user->links()->orderBy('sort')->get(),
-        ])->with('message', 'Alterado com sucesso!');
+        return redirect()->back()->with('message', 'Alterado com sucesso!');
     }
 
     public function down(Link $link)
@@ -90,12 +90,12 @@ class LinkController extends Controller
             ->where('sort', '=', $newOrder)
             ->first();
 
-        $link->fill(['sort' => $newOrder])->save();
-        $swapWith->fill(['sort' => $order])->save();
+        if ($swapWith) { // Verifique se $swapWith não é null
+            $link->fill(['sort' => $newOrder])->save();
+            $swapWith->fill(['sort' => $order])->save();
+        }
 
-        return view('dashboard', [
-            'links' => $user->links()->orderBy('sort')->get(),
-        ])->with('message', 'Alterado com sucesso!');
+        return redirect()->back()->with('message', 'Alterado com sucesso!');
     }
 
     /**
