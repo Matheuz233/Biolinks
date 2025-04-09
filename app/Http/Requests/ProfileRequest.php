@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\CheckHandler;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileRequest extends FormRequest
@@ -24,7 +25,7 @@ class ProfileRequest extends FormRequest
         return [
             'name' => ['required','string', 'min:3', 'max:30'],
             'description' => ['nullable'],
-            'handler' => ['required', 'unique:users'],
+            'handler' => ['required', 'unique:users', new CheckHandler()],
         ];
     }
 }

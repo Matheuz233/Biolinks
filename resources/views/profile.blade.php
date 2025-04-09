@@ -16,7 +16,7 @@
         <div>
             <label for="description">Descrição</label>
             <textarea type="description" name="description" id="description">{{ old('description', $user->description) }}</textarea>
-            @error('name')
+            @error('description')
                 <p>{{ $message }}</p>
             @enderror
         </div>
@@ -25,12 +25,12 @@
             <label for="handler">biolinks.com.br/</label>
             <input type="handler" name="handler" id="description" value="{{ old('handler', $user->handler) }}"
                 placeholder="@seulink">
-            @error('name')
+            @error('handler')
                 <p>{{ $message }}</p>
             @enderror
         </div>
 
         <a href="{{ route('dashboard') }}">Cancelar</a>
-        <button type="submit">Update</button>
+        <button type="submit">Atualizar</button>
     </form>
 </div>
