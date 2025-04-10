@@ -1,3 +1,5 @@
+<x-layouts.app>
+
 <h2>{{ $user->name }} :: {{ $user->id }}</h2>
 
 <h3>biolinks.com.br/{{ $user->handler }}</h3>
@@ -13,3 +15,5 @@
         </li>
     @endforeach
 </ul>
+
+</x-layouts.app>
