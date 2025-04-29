@@ -1,38 +1,18 @@
 <x-layouts.app>
-    <div>
-        <h1>Profile</h1>
+    <x-container>
+        <x-card title="Profile">
+            <x-form :route="route('profile')" put id="form" enctype="multipart/form-data">
+                <x-input name="name" placeholder="Name" value="{{ old('name', $user->name) }}" />
+                <x-text-area name="description" placeholder="Description"
+                    value="{{ old('description', $user->description) }}" />
+                <x-input name="handler" prefix="biolinks.com.br/" placeholder="Handler"
+                    value="{{ old('handler', $user->handler) }}" />
+            </x-form>
 
-        <form action={{ route('profile') }} method="post">
-            @csrf
-            @method('PUT')
-
-            <div>
-                <label for="name">Nome</label>
-                <input type="name" name="name" id="name" value="{{ old('name', $user->name) }}">
-                @error('name')
-                    <p>{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div>
-                <label for="description">Descrição</label>
-                <textarea type="description" name="description" id="description">{{ old('description', $user->description) }}</textarea>
-                @error('description')
-                    <p>{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div>
-                <label for="handler">biolinks.com.br/</label>
-                <input type="handler" name="handler" id="description" value="{{ old('handler', $user->handler) }}"
-                    placeholder="@seulink">
-                @error('handler')
-                    <p>{{ $message }}</p>
-                @enderror
-            </div>
-
-            <a href="{{ route('dashboard') }}">Cancelar</a>
-            <button type="submit">Atualizar</button>
-        </form>
-    </div>
+            <x-slot:actions>
+                <x-button form="form">Update Profile</x-button>
+                <x-a :href="route('dashboard')">Cancel</x-a>
+            </x-slot:actions>
+        </x-card>
+    </x-container>
 </x-layouts.app>
